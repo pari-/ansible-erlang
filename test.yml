@@ -1,0 +1,7 @@
+---
+
+- hosts: "all"
+  roles:
+    - role: "ansible-erlang"
+      tags:
+        - "erlang"

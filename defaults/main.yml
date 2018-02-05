@@ -1,0 +1,20 @@
+---
+
+erlang_cache_valid_time: 3600
+erlang_default_release: "{{ ansible_distribution_release|lower }}"
+erlang_package_list:
+  - "esl-erlang"
+#  - "erlang"
+erlang_pre_default_release: "{{ erlang_default_release }}"
+erlang_pre_package_list:
+  - "apt-transport-https"
+  - "ca-certificates"
+erlang_repo_list:
+  - repo: "deb https://packages.erlang-solutions.com/debian {{ erlang_default_release }} contrib"
+    key:
+      id: "D208507CA14F4FCA"
+      keyserver: "keyserver.ubuntu.com"
+erlang_supported_distro_list:
+  - "jessie"
+  - "stretch"
+erlang_update_cache: "yes"

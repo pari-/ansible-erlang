@@ -15,6 +15,5 @@ erlang_repo_list:
       id: "D208507CA14F4FCA"
       keyserver: "keyserver.ubuntu.com"
 erlang_supported_distro_list:
-  - "jessie"
   - "stretch"
 erlang_update_cache: "yes"

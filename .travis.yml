@@ -13,9 +13,6 @@ env:
     - "IMAGE=irap/docker-debian-ansible:stretch"
   matrix:
     - "NTH_SUPPORTED_ANSIBLE_VERSION=1"
-    - "NTH_SUPPORTED_ANSIBLE_VERSION=2"
-    - "NTH_SUPPORTED_ANSIBLE_VERSION=3"
-    - "NTH_SUPPORTED_ANSIBLE_VERSION=4"
 language: "python"
 notifications:
   email: false

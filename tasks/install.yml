@@ -1,6 +1,6 @@
 ---
 
-- name: "add additional apt keys"
+- name: "Add additional apt keys"
   apt_key:
     id: "{{ item.key.id | default(omit) }}"
     url: "{{ item.key.url | default(omit) }}"
@@ -11,25 +11,30 @@
     - "item.key is defined"
     - "item.key"
     - "item.key.id is defined and item.key.id or item.key.url is defined and item.key.url"
-  with_items:
-    - "{{ erlang_repo_list }}"
+  loop: "{{ erlang_repo_list | flatten(levels=1) }}"
 
-- name: "add additional apt repositories"
+- name: "Ensure accessing metadata and packages available over https is possible"
+  apt:
+    name: "{{ item }}"
+    state: "present"
+  loop:
+    - "apt-transport-https"
+    - "ca-certificates"
+
+- name: "Add additional apt repositories"
   apt_repository:
     repo: "{{ item.repo }}"
     state: "present"
   when:
     - "item.repo is defined"
     - "item.repo"
-  with_items:
-    - "{{ erlang_repo_list }}"
+  loop: "{{ erlang_repo_list | flatten(levels=1) }}"
 
-- name: "install packages"
+- name: "Install packages"
   apt:
-    name: "{{ item }}"
-    update_cache: "{{ erlang_update_cache|default(omit) }}"
-    cache_valid_time: "{{ erlang_cache_valid_time|default(omit) }}"
+    name: "{{ (item is mapping) | ternary(item['pkg'], item) }}"
+    update_cache: "{{ erlang_update_cache | default(omit) }}"
+    cache_valid_time: "{{ erlang_cache_valid_time | default(omit) }}"
     state: "present"
-    default_release: "{{ erlang_default_release|default(omit) }}"
-  with_items:
-    - "{{ erlang_package_list }}"
+    default_release: "{{ item['release'] | default(omit) }}"
+  loop: "{{ erlang_package_list | flatten(levels=1) }}"

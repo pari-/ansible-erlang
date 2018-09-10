@@ -7,7 +7,6 @@ galaxy_info:
   galaxy_tags:
     - "erlang"
   license: "MIT"
-  min_ansible_version: "2.1.6.0"
   platforms:
     - name: "Debian"
       versions:

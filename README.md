@@ -18,8 +18,7 @@ An Ansible role which installs and configures erlang
 ## Requirements
 
 Currently this role is developed for and tested on Debian GNU/Linux (release: stretch).
-
-Ansible version compatibility: [Dockerfile](https://github.com/pari-/docker-debian-ansible/blob/master/debian/stretch/Dockerfile)
+The Ansible version used for tests can be found here: [Dockerfile](https://github.com/pari-/docker-debian-ansible/blob/master/debian/stretch/Dockerfile)
 
 ## Example
 

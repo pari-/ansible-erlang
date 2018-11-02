@@ -1,5 +1,13 @@
 ---
 
+- name: "Ensure accessing metadata and packages available over https is possible"
+  apt:
+    name: "{{ item }}"
+    state: "present"
+  loop:
+    - "apt-transport-https"
+    - "ca-certificates"
+
 - name: "Add additional apt keys"
   when:
     - "item.key is defined"
@@ -12,14 +20,6 @@
     validate_certs: "{{ item.key.validate_certs | default(omit) }}"
     state: "present"
   loop: "{{ erlang_repo_list | flatten(levels=1) }}"
-
-- name: "Ensure accessing metadata and packages available over https is possible"
-  apt:
-    name: "{{ item }}"
-    state: "present"
-  loop:
-    - "apt-transport-https"
-    - "ca-certificates"
 
 - name: "Add additional apt repositories"
   when:
